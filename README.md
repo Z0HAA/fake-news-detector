@@ -1,106 +1,146 @@
-================================================================
-  DEPLOYED APPLICATION URL
-================================================================
+# 📰 Fake News Detection using NLP & Machine Learning
 
-  https://z0ha.pythonanywhere.com
+## 📌 Overview
+This project implements a complete **Natural Language Processing (NLP) pipeline** to classify English news articles as **REAL** or **FAKE** using Machine Learning.
 
-================================================================
-  PROJECT SUMMARY — FAKE NEWS DETECTION USING NLP & ML
-================================================================
+The system takes a news **title + body text** as input and returns:
+- Predicted label (**REAL / FAKE**)  
+- Confidence score  
 
-OVERVIEW
---------
-This project implements a complete Natural Language Processing (NLP)
-pipeline to automatically classify English news articles as either
-REAL or FAKE using Machine Learning. The system accepts a news title
-and article body text as input and returns a prediction along with
-a confidence score.
+A web application is also deployed for real-time predictions.
 
+---
 
-DATASET
--------
-Dataset  : ISOT Fake and Real News Dataset
-Source   : Kaggle
-Link     : https://www.kaggle.com/datasets/clmentbisaillon/fake-and-real-news-dataset
-Files    : True.csv (real news from Reuters) and Fake.csv (fake news websites)
-Sample   : 100 balanced instances — 50 REAL and 50 FAKE (toy dataset)
+## 🚀 Live Demo
+🔗 https://z0ha.pythonanywhere.com  
 
+---
 
-INPUT & OUTPUT
---------------
-Input  : English news article (title + body text combined)
-Output : Predicted label — REAL or FAKE — with confidence score
+## 📂 Dataset
+- **Name:** ISOT Fake and Real News Dataset  
+- **Source:** Kaggle  
+- **Files Used:**
+  - `True.csv` → Real news (Reuters)
+  - `Fake.csv` → Fake news articles  
 
+### 📊 Sample Dataset
+- 100 balanced instances:
+  - 50 REAL  
+  - 50 FAKE  
+- Used as a **toy dataset** for quick training and deployment
 
-PIPELINE STEPS
---------------
-1. Data Collection
-   Loaded True.csv and Fake.csv from Google Drive in Google Colab.
-   Added a Label column (REAL / FAKE) to each dataset.
+---
 
-2. Feature Engineering
-   Combined the 'title' and 'text' columns into a single field
-   called 'News_Content' to give the model maximum text signal.
+## 🔄 NLP Pipeline
 
-3. Dataset Sampling (Toy Dataset)
-   Created a balanced sample of 100 instances (50 REAL + 50 FAKE)
-   using groupby().apply() with random_state=42 for reproducibility.
-   Saved as sample_news.csv.
+### 1. Data Collection
+- Loaded dataset in Google Colab  
+- Added a `Label` column (REAL / FAKE)
 
-4. Data Cleaning & Preprocessing
-   Applied three preprocessing steps to every article:
-     - Removed symbols, numbers, punctuation, and URLs
-     - Converted all text to lowercase
-     - Removed English stopwords using NLTK
-   Saved cleaned data as cleaned_sample_news.csv.
+### 2. Feature Engineering
+- Combined `title` and `text` into:
+  News_Content
 
-5. Train/Test Split
-   Split the 100-instance sample into:
-     - 80 rows for training (80%)
-     - 20 rows for testing  (20%)
+### 3. Sampling
+- Created balanced dataset using:
+  - groupby().apply()
+  - random_state=42
 
-6. Feature Extraction
-   Used TF-IDF Vectorizer (max_features=500) to convert cleaned
-   text into numerical feature vectors for model input.
+### 4. Data Preprocessing
+Applied:
+- Removal of punctuation, numbers, symbols, URLs  
+- Lowercasing  
+- Stopword removal using NLTK  
 
-7. Model Training
-   Trained a Logistic Regression classifier on the TF-IDF feature
-   matrix. Logistic Regression was chosen over Naive Bayes because
-   it does not assume word independence and performs significantly
-   better on news article text classification tasks.
+---
 
-8. Model Evaluation
-   Accuracy  : 85%
-   Precision : 0.89
-   Recall    : 0.85
-   F1-Score  : 0.85
-   The model correctly classified 17 out of 20 test articles.
+## 🔢 Train-Test Split
+- Training set: **80%**  
+- Testing set: **20%**
 
-9. Model Saving
-   Saved the trained model and vectorizer as .pkl files using joblib:
-     - fake_news_lr_model.pkl
-     - tfidf_vectorizer.pkl
+---
 
-10. Web Application Deployment
-    Built a Flask web application with a modern, responsive UI.
-    Deployed live on PythonAnywhere (free tier).
-    The app accepts user text input, preprocesses it, applies the
-    trained model, and returns a REAL or FAKE prediction with
-    confidence score in real time.
+## 🧠 Feature Extraction
+- **TF-IDF Vectorizer**
+  - max_features = 500
 
+---
 
-TECHNOLOGY STACK
-----------------
-Language   : Python 3.x
-IDE        : Google Colab (Jupyter Notebook)
-Libraries  : pandas, scikit-learn, nltk, joblib, matplotlib, seaborn
-Web        : Flask
-Deployment : PythonAnywhere
-Algorithm  : Logistic Regression + TF-IDF Vectorizer
+## 🤖 Model Training
+- **Algorithm:** Logistic Regression  
+- Chosen because:
+  - Performs well on text classification  
+  - Does not assume word independence (unlike Naive Bayes)
 
+---
 
-LIVE URL
---------
-  https://z0ha.pythonanywhere.com
+## 📈 Model Performance
 
-================================================================
+| Metric     | Score |
+|-----------|------|
+| Accuracy  | 85%  |
+| Precision | 0.89 |
+| Recall    | 0.85 |
+| F1 Score  | 0.85 |
+
+Correct predictions: **17 / 20 test samples**
+
+---
+
+## 💾 Model Saving
+Saved using joblib:
+- fake_news_lr_model.pkl  
+- tfidf_vectorizer.pkl  
+
+---
+
+## 🌐 Web Application
+- Built using **Flask**
+- Features:
+  - Clean and responsive UI  
+  - Real-time predictions  
+  - Confidence score display  
+
+### ⚙️ Deployment
+- Platform: **PythonAnywhere (Free Tier)**  
+
+---
+
+## 🛠️ Tech Stack
+
+| Category     | Tools Used |
+|-------------|----------|
+| Language     | Python 3 |
+| Environment  | Google Colab |
+| Libraries    | pandas, scikit-learn, nltk, joblib |
+| Visualization| matplotlib, seaborn |
+| Web          | Flask |
+| Deployment   | PythonAnywhere |
+
+---
+
+## 📌 How to Run Locally
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/fake-news-detection.git
+
+# Navigate to project folder
+cd fake-news-detection
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the app
+python app.py
+```
+
+---
+
+## 📖 Future Improvements
+- Train on full dataset (not just 100 samples)  
+- Try advanced models (SVM, Random Forest, Deep Learning)  
+- Improve UI/UX  
+- Add API support  
+
+---
